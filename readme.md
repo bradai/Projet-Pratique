@@ -1,60 +1,101 @@
-[comment]: <> (question 1)
-Créer un nouveau projet Symfony
-symfony new mon-projet --full
+# Mini-guide d'installation et de lancement des tests pour l'application Symfony 6
 
-Configurer la base de données
-DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
+## Étape 1 : Récupérer le projet depuis Git
+---------------------------------------
 
-[comment]: <> (question 2)
-Modifier le fichier hosts
+
+<pre>
+git clone https://github.com/bradai/Projet-Pratique.git
+</pre>
+
+## Étape 2 : Accédez au dossier du projet cloné
+---------------------------------------
+<pre>
+cd Projet-Pratique
+</pre>
+
+## Étape 3 : Configurer le domaine
+--------------------------------
+
+1. Ouvrez le fichier `/etc/hosts` en tant qu'administrateur (Linux et macOS) ou `C:\Windows\System32\drivers\etc\hosts` (Windows).
+2. Ajoutez la ligne suivante :
+
 127.0.0.1 www.testrec01.local
 
-créer un fichier de configuration "testrec01.local.conf" dans le dossier C:\wamp\bin\apache\apache2\conf\extra\
+3. Configurez le serveur web pour utiliser le port 5458. Modifiez le fichier `.env` dans le dossier du projet et ajoutez la ligne suivante :
+
+APP_PORT=5458
+
+4. Redémarrez le serveur de développement avec la commande :
+
+## Étape 4 : Installer les dépendances
+---------------------------------------------
+
+<pre>
+composer install
+</pre>
 
 
-[comment]: <> (<VirtualHost *:5458>)
-
-[comment]: <> (ServerName www.testrec01.local)
-
-[comment]: <> (ServerAlias testrec01.local)
-
-[comment]: <> (DocumentRoot C:\wamp\www\test-pratique /chemin du projet)
-
-[comment]: <> (    DirectoryIndex /index.php)
-
-[comment]: <> (    <Directory C:\wamp\www\test-pratique /chemin du projet)
-
-[comment]: <> (        AllowOverride All)
-
-[comment]: <> (        Order Allow,Deny)
-
-[comment]: <> (        Allow from All)
-
-[comment]: <> (        Require all granted)
-
-[comment]: <> (        FallbackResource /index.php)
-
-[comment]: <> (    </Directory>)
-
-[comment]: <> (    ErrorLog ${APACHE_LOG_DIR}/testrec01.local_error.log)
-
-[comment]: <> (    CustomLog ${APACHE_LOG_DIR}/testrec01.local_access.log combined)
-
-[comment]: <> (</VirtualHost>)
+## Étape 5 : Appliquer les migrations
+---------------------------------------------
 
 
-sudo a2ensite testrec01.local
+<pre>
+php bin/console doctrine:migrations:migrate
+</pre>
 
-add in C:\wamp\bin\apache\apache2\conf\httpd.conf
-Include conf/extra/testrec01.local.conf
+## Étape 5 : Charger les fixtures
+---------------------------------------------
+<pre>
+php bin/console doctrine:fixtures:load
+</pre>
 
-and update in C:\wamp\bin\apache\apache2\conf\httpd.conf
-Listen 5458
+## Étape 5 : Lancer le serveur de développement
+---------------------------------------------
+<pre>
+symfony server:start
+</pre>
 
-sudo service apache2 restart
 
-[comment]: <> (question 3 ) 
+## Étape 5 : Exécuter les tests unitaires
+---------------------------------------------
+
+<pre>
+./bin/phpunit
+</pre>
+
+
+##Les commande utiliser
+
+1. question 1
+<pre>
+composer create-project symfony/website-skeleton test-pratique
+</pre>
+
+2. question 2
+<pre>
 composer require symfony/security-bundle
-composer require symfony/form
+</pre>
 
-Configurer la sécurité
+3. question 3
+<pre>
+php bin/console make:entity
+</pre>
+
+
+<pre>
+php bin/console make:crud
+</pre>
+
+4.question 4
+<pre>
+composer require dompdf/dompdf
+</pre>
+
+5 question 5
+<pre>
+php bin/console make:fixtures
+</pre>
+
+
+
