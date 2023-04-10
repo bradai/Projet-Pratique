@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des factures{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+
+{% endblock %}
+{% block nav %}
+    <nav>
+        <ul>
+            <li><a href="#">Présentation</a></li>
+            <li><a href="#">Professionnels</a></li>
+            <li><a href="#">Particuliers</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Partenaires</a></li>
+        </ul>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 bg-info column">
+                <div class="col-1-text">
+                    Gérer mes factures
+                </div>
+            </div>
+            <div class="col-md-6 bg-light column">
+                <a href="{{ path('app_facture_new') }}" class="btn btn-sm btn-primary">Create new</a>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Désignation</th>
+                        <th>Description</th>
+                        <th>Prix Total HT</th>
+                        <th>Prix Total TTC</th>
+                        <th>Articles</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for facture in pagination %}
+                        <tr>
+                            <td>{{ facture.id }}</td>
+                            <td>{{ facture.designation }}</td>
+                            <td>{{ facture.description }}</td>
+                            <td>{{ facture.prixTotalHT }}</td>
+                            <td>{{ facture.prixTotalTTC }}</td>
+                            <td>
+                                {% for article in facture.articles %}
+                                    {{ article.nom }} ({{ article.prix }} €)<br>
+                                {% endfor %}
+                            </td>
+
+                            <td>
+                                <a href="{{ path('app_facture_show', {'id': facture.id}) }}" class="btn btn-primary">Show</a>
+
+                                <a href="{{ path('app_facture_edit', {'id': facture.id}) }}" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </a>
+                                <form action="{{ path('app_facture_delete', {'id': facture.id}) }}" method="post"
+                                      onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette facture ?');"
+                                      style="display:inline;">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden"  name="_token" value="{{ csrf_token('delete' ~ facture.id) }}">
+                                    <button type="submit" class="btn btn-sm btn-danger custom-button">
+                                        <i class="fas fa-trash"></i> Supprimer
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-3 bg-info column">
+                <div class="col-3-text">
+                    Nous contacter
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ knp_pagination_render(pagination) }}
+
+
+{% endblock %}
+
+

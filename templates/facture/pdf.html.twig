@@ -1,0 +1,77 @@
+{% set currency = '€' %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Facture</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .facture-table {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .facture-table td:nth-child(1),
+        .facture-table th:nth-child(1) {
+            width: 25%;
+        }
+        .facture-table td:nth-child(2),
+        .facture-table th:nth-child(2) {
+            width: 50%;
+        }
+        .facture-table td:nth-child(3),
+        .facture-table th:nth-child(3) {
+            width: 25%;
+        }
+        .facture-table th,
+        .facture-table td {
+            background-color: #ADD8E6; /* Couleur bleu ciel */
+            color: #ffffff;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+            border: 1px solid #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Facture</h1>
+    <table class="facture-table">
+        <tr>
+            <th>Désignation</th>
+            <td>{{ facture.designation }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ facture.description }}</td>
+        </tr>
+        <tr>
+            <th>Prix Total HT</th>
+            <td>{{ facture.prixTotalHT }} {{ currency }}</td>
+        </tr>
+        <tr>
+            <th>Prix Total TTC</th>
+            <td>{{ facture.prixTotalTTC }} {{ currency }}</td>
+        </tr>
+    </table>
+    <h2>Articles</h2>
+    <table class="articles-table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prix</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.nom }}</td>
+                <td>{{ article.prix }} {{ currency }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

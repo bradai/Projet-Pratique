@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #007bff;
+            color: #fff;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+{% endblock %}
+
+
+{% block title %}Facture{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-primary mb-4">Facture</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <th>Désignation</th>
+                        <td>{{ facture.designation }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ facture.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prix Total HT</th>
+                        <td>{{ facture.prixTotalHT }}</td>
+                    </tr>
+                    <tr>
+                        <th>Articles</th>
+                        <td>
+                        {% for article in facture.articles %}
+                            {{ article.nom }} ({{ article.prix }} €)<br>
+                        {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Prix Total TTC</th>
+                        <td>{{ facture.prixTotalTTC }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href="{{ path('app_facture_edit', {'id': facture.id}) }}" class="btn btn-primary">Modifier</a>
+                <a href="{{ path('app_facture_index') }}" class="btn btn-secondary">Retour à la liste des factures</a>
+                <a href="{{ path('facture_pdf', {'id': facture.id}) }}" class="btn btn-info" target="_blank">Voir la facture en PDF</a>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

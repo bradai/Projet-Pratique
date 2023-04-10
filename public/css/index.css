@@ -1,0 +1,43 @@
+
+.container {
+    max-width: 1200px;
+    margin-top: 5% !important;
+}
+.col-1-text,
+.col-3-text {
+    font-size: calc(12px + 1vw);
+}
+
+.column {
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.column:first-child {
+    padding-left: 0;
+}
+
+.column:last-child {
+    padding-right: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin-top: 5% !important;
+}
+.col-1-text,
+.col-3-text {
+    font-size: calc(12px + 1vw);
+}
+
+.custom-button {
+    width: 90px;
+    height: 60px;
+    margin-top: 1%;
+}
+
+.btn-primary {
+    width: 90px;
+    margin-top: 1%;
+    height: 30px;
+}

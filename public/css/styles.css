@@ -1,0 +1,27 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: lightblue;
+    padding: 1rem;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.phone {
+    margin-top: 0.5rem;
+}
+nav a {
+    color: #100f0f;
+    text-decoration: none;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    color: #fff;
+}

@@ -1,0 +1,6 @@
+#barryvdh_dompdf:
+#  defaults:
+#    dpi: 96
+#    default_font: 'Arial'
+#    paper: 'A4'
+#    orientation: 'portrait'
