@@ -22,6 +22,29 @@ nav a {
 nav {
     display: flex;
     justify-content: center;
-    background-color: #ffffff;
-    color: #fff;
+    background-color: #d0c9e2;
+    color: #687f9c;
+}
+
+nav ul {
+    display: flex !important;
+    justify-content: center !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+nav li {
+    margin: 0 10px !important;
+}
+
+nav a {
+    color: #171212;
+    text-decoration: none;
+    padding: 6px 12px;
+}
+
+nav a:hover {
+    background-color: #555;
+    border-radius: 4px;
 }
